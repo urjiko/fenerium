@@ -1,1 +1,1 @@
- "Bu proje, web geliştirme becerilerini sergilemek amacıyla oluşturulmuş bir demo çalışmasıdır. Orijinal [Orijinal Site Adı] ile herhangi bir ticari bağlantısı yoktur ve telif hakkı ihlali durumunda ilgili içerik derhal kaldırılacaktır. Tüm telif hakları orijinal içerik sahibine aittir.
+ "Bu proje, web geliştirme becerilerini sergilemek amacıyla oluşturulmuş bir demo çalışmasıdır. Orijinal Fenerium ile herhangi bir ticari bağlantısı yoktur ve telif hakkı ihlali durumunda ilgili içerik derhal kaldırılacaktır. Tüm telif hakları orijinal içerik sahibine aittir.
