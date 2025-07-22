@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fenerium | Fenerbahçe 2025/26 Çubuklu Forma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles to match Fenerium design */
+        body {
+            font-family: 'Rubik', sans-serif; /* Primary font from Fenerium */
+            background-color: #f0f2f5; /* Light gray background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0; /* Remove body padding for full width header */
+            box-sizing: border-box;
+        }
+
+        /* Top Header Bar */
+        .top-header-bar {
+            width: 100%;
+            background-color: #004d98; /* Fenerbahçe Blue */
+            color: #ffffff;
+            padding: 8px 20px;
+            font-size: 0.875rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .top-header-bar a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 15px;
+            transition: opacity 0.2s ease;
+        }
+        .top-header-bar a:hover {
+            opacity: 0.8;
+        }
+        .top-header-bar .left-links,
+        .top-header-bar .right-links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .top-header-bar .right-links i {
+            margin-right: 5px;
+        }
+
+        /* Main Header */
+        .main-header {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column; /* Stack on mobile */
+            align-items: center;
+            gap: 15px;
+        }
+        @media (min-width: 768px) {
+            .main-header {
+                flex-direction: row; /* Row on desktop */
+                justify-content: space-between;
+            }
+        }
+        .main-header .logo-search {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 100%; /* Full width on mobile */
+            justify-content: center; /* Center items on mobile */
+        }
+        @media (min-width: 768px) {
+            .main-header .logo-search {
+                width: auto;
+                justify-content: flex-start;
+            }
+        }
+        .main-header .logo {
+            height: 40px;
+        }
+        .main-header .search-bar {
+            flex-grow: 1; /* Allow search bar to expand */
+            max-width: 400px; /* Max width for search bar */
+            position: relative;
+        }
+        .main-header .search-bar input {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .main-header .search-bar input:focus {
+            border-color: #004d98;
+        }
+        .main-header .search-bar .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+        .main-header .nav-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 1.25rem;
+            color: #4b5563;
+        }
+        .main-header .nav-icons a {
+            color: #4b5563;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .main-header .nav-icons a:hover {
+            color: #004d98;
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            width: 100%;
+            background-color: #f8f8f8; /* Lighter background for nav */
+            padding: 12px 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+            display: flex;
+            justify-content: center; /* Center nav items */
+            flex-wrap: wrap; /* Allow wrapping */
+            gap: 25px;
+        }
+        .main-nav a {
+            color: #374151;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+        .main-nav a:hover {
+            color: #004d98;
+        }
+        .main-nav a.active::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 3px;
+            background-color: #fcc400; /* Yellow highlight for active */
+            border-radius: 2px;
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            width: 100%;
+            max-width: 1200px; /* Match product container max-width */
+            margin-top: 20px;
+            padding: 0 20px;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        .breadcrumbs a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            margin: 0 5px;
+        }
+        .breadcrumbs .current-page {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        /* Product Page Container */
+        .product-page-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column; /* Default for mobile */
+            max-width: 1200px; /* Max width for the whole product page */
+            width: 100%;
+            overflow: hidden;
+            margin-top: 20px; /* Space from breadcrumbs */
+        }
+
+        @media (min-width: 768px) {
+            .product-page-container {
+                flex-direction: row; /* Desktop layout */
+            }
+        }
+
+        /* Left Image Gallery Section */
+        .image-gallery-section {
+            display: flex;
+            flex-direction: column; /* Stack thumbnails and main image */
+            align-items: center;
+            padding: 20px;
+            background-color: #f9f9f9; /* Lighter background for image section */
+            flex-shrink: 0; /* Prevent shrinking */
+            width: 100%; /* Full width on mobile */
+        }
+
+        @media (min-width: 768px) {
+            .image-gallery-section {
+                flex-direction: row; /* Thumbnails left, main image right */
+                align-items: flex-start;
+                width: 50%; /* Half width on desktop */
+                max-width: 600px; /* Max width for image gallery */
+            }
+        }
+
+        .thumbnail-images-vertical {
+            display: flex;
+            flex-direction: row; /* Default horizontal for mobile */
+            gap: 10px;
+            margin-bottom: 20px; /* Space below thumbnails on mobile */
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .thumbnail-images-vertical {
+                flex-direction: column; /* Vertical on desktop */
+                margin-right: 20px; /* Space to the right of thumbnails */
+                margin-bottom: 0;
+            }
+        }
+
+        .thumbnail-images-vertical img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+        }
+        .thumbnail-images-vertical img:hover,
+        .thumbnail-images-vertical img.active {
+            border-color: #004d98; /* Fenerbahçe blue */
+        }
+        .main-image {
+            width: 100%;
+            max-width: 400px; /* Max width for the main image */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Right Product Details Section */
+        .product-details-section {
+            flex: 1; /* Takes remaining space */
+            padding: 30px;
+        }
+
+        .product-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .product-title {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            color: #1f2937; /* gray-800 */
+        }
+        .new-season-tag {
+            background-color: #fcc400; /* Yellow */
+            color: #1f2937;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .favorite-icon {
+            display: flex;
+            align-items: center;
+            color: #9ca3af; /* gray-400 */
+            font-size: 1.125rem;
+        }
+        .favorite-icon i {
+            margin-right: 5px;
+            color: #f44336; /* Red heart */
+        }
+        .product-code {
+            font-size: 0.875rem; /* text-sm */
+            color: #6b7280; /* gray-600 */
+            margin-bottom: 10px;
+        }
+        .price-and-stars {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        .price {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            color: #004d98; /* Fenerbahçe Blue */
+        }
+        .star-icons {
+            display: flex;
+            gap: 2px;
+            color: #fcc400; /* Yellow for stars */
+            font-size: 1.5rem; /* Larger stars */
+        }
+        .bonus-info {
+            font-size: 0.875rem; /* text-sm */
+            color: #4b5563; /* gray-500 */
+            margin-bottom: 20px;
+        }
+        .bonus-info a {
+            color: #2563eb; /* blue-600 */
+            text-decoration: none;
+        }
+        .bonus-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Common Option Styling */
+        .option-section {
+            margin-top: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb; /* Separator */
+        }
+        .option-section:last-of-type {
+            border-bottom: none; /* No border for the last section */
+        }
+        .option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .option-title {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+            color: #1f2937; /* gray-700 */
+        }
+        .find-size-link {
+            font-size: 0.875rem;
+            color: #2563eb;
+            text-decoration: none;
+        }
+        .find-size-link:hover {
+            text-decoration: underline;
+        }
+
+        .grid-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .option-button {
+            padding: 10px 18px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background-color: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            color: #374151;
+        }
+        .option-button:hover {
+            border-color: #004d98;
+            background-color: #e0f2fe;
+        }
+        .option-button.selected {
+            background-color: #004d98;
+            color: #ffffff;
+            border-color: #004d98;
+        }
+
+        /* Color Option Specific */
+        .color-option-display {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #d1d5db;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+        }
+        .color-option-display.selected {
+            border-color: #004d98;
+            box-shadow: 0 0 0 2px #e0f2fe; /* Outer ring for selected */
+        }
+        .color-option-display img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Number and Name Section */
+        .number-name-inputs {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .number-name-inputs input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #374151;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .number-name-inputs input:focus {
+            border-color: #004d98;
+            box-shadow: 0 0 0 3px rgba(0, 77, 152, 0.2);
+        }
+        .player-toggle {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        .player-toggle input[type="checkbox"] {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .player-toggle label {
+            font-size: 0.95rem;
+            color: #374151;
+            cursor: pointer;
+        }
+
+        /* Quantity Control */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .quantity-button {
+            background-color: #f0f2f5;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .quantity-button:hover {
+            background-color: #e5e7eb;
+        }
+        .quantity-display {
+            min-width: 40px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        /* Star Count Control */
+        .star-count-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .star-count-button {
+            background-color: #f0f2f5;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .star-count-button:hover {
+            background-color: #e5e7eb;
+        }
+        .star-count-display {
+            min-width: 40px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .add-to-cart-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #004d98; /* Fenerbahçe Blue */
+            color: #ffffff;
+            font-weight: 700;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.125rem;
+            transition: background-color 0.2s ease;
+        }
+        .add-to-cart-button:hover {
+            background-color: #003a7a;
+        }
+        .search-in-store-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ffffff;
+            color: #004d98;
+            font-weight: 700;
+            border-radius: 8px;
+            border: 1px solid #004d98;
+            cursor: pointer;
+            font-size: 1.125rem;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .search-in-store-button:hover {
+            background-color: #e0f2fe;
+        }
+
+        /* Product Features Section */
+        .product-features {
+            margin-top: 30px;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 20px;
+        }
+        .features-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        .features-header h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .features-header i {
+            font-size: 1rem;
+            color: #6b7280;
+            transition: transform 0.3s ease;
+        }
+        .features-header.collapsed i {
+            transform: rotate(-90deg);
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 500px; /* Max height for animation */
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .feature-list.collapsed {
+            max-height: 0;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #4b5563;
+            font-size: 0.95rem;
+        }
+        .feature-item svg {
+            margin-right: 10px;
+            color: #6b7280;
+            flex-shrink: 0; /* Prevent icon from shrinking */
+        }
+
+        /* Message Box */
+        .message-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none; /* Allow clicks through */
+        }
+        .message-box.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header Bar -->
+    <div class="top-header-bar">
+        <div class="left-links">
+            <a href="#"><i class="fas fa-star"></i> Her Anında Yanında</a>
+        </div>
+        <div class="right-links">
+            <a href="#">Üye Ol</a>
+            <a href="#">English</a>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="logo-search">
+            <img src="https://media.fenerium.com/Fenerium/media/images/fenerium-logo.png?ext=.png" alt="Fenerium Logo" class="logo h-10">
+            <div class="search-bar">
+                <input type="text" placeholder="Fenerium'da Ara">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+        <div class="nav-icons">
+            <a href="#"><i class="fas fa-percent"></i> Şans Feneri</a>
+            <a href="#"><i class="fas fa-gift"></i> Biriktir Kazan</a>
+            <a href="#"><i class="fas fa-user"></i></a>
+            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <a href="#">ERKEK</a>
+        <a href="#">KADIN</a>
+        <a href="#">ÇOCUK</a>
+        <a href="#">EV/YAŞAM</a>
+        <a href="#">AKSESUAR</a>
+        <a href="#" class="active">OUTLET</a>
+        <a href="#">KAMPANYALAR</a>
+        <a href="#">HEDİYE KARTI</a>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <a href="#">Anasayfa</a> <span>></span>
+        <a href="#">Erkek</a> <span>></span>
+        <a href="#">Futbol</a> <span>></span>
+        <a href="#">Forma</a> <span>></span>
+        <span class="current-page">Fenerbahçe 2025/26 Çubuklu Forma</span>
+    </div>
+
+    <div class="product-page-container">
+        <!-- Left Image Gallery Section -->
+        <div class="image-gallery-section">
+            <div class="thumbnail-images-vertical">
+                <img src="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR.jpg" alt="Thumbnail 1" class="active" data-full-image="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR.jpg">
+                <img src="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR-02.jpg" alt="Thumbnail 2" data-full-image="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR-02.jpg">
+                <img src="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR-03.jpg" alt="Thumbnail 3" data-full-image="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR-03.jpg">
+                <img src="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR-04.jpg" alt="Thumbnail 4" data-full-image="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR-04.jpg">
+                <img src="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR-05.jpg" alt="Thumbnail 5" data-full-image="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR-05.jpg">
+                <img src="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR-06.jpg" alt="Thumbnail 6" data-full-image="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR-06.jpg">
+                <img src="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR-07.jpg" alt="Thumbnail 7" data-full-image="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR-07.jpg">
+            </div>
+            <img id="mainProductImage" src="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR.jpg" alt="Fenerbahçe Forması" class="main-image">
+        </div>
+
+        <!-- Right Product Details Section -->
+        <div class="product-details-section">
+            <div class="product-header-top">
+                <span class="new-season-tag">Yeni Sezon</span>
+                <div class="favorite-icon">
+                    <i class="fas fa-heart"></i>
+                    <span>257</span>
+                </div>
+            </div>
+            <h1 class="product-title">Fenerbahçe 2025/26 Çubuklu Forma</h1>
+            <p class="product-code">Ürün Kodu: AT0105EFS0246SR</p>
+            <div class="price-and-stars">
+                <p class="price" id="currentPrice">4.249,00₺</p>
+                <div class="star-icons" id="starIcons">
+                    <!-- Stars will be dynamically added here -->
+                </div>
+            </div>
+            <p class="bonus-info">Fenerbahçe Bonusu ile %10 indirim! <a href="https://www.bonus.com.tr/fenerbahce-bonus-hemen-basvur?SourceCode=5C062196" target="_blank">Başvurmak için tıklayın.</a></p>
+
+            <!-- Size Options -->
+            <div class="option-section">
+                <div class="option-header">
+                    <h3 class="option-title">Beden</h3>
+                    <a href="#" class="find-size-link">Bedenimi Bul</a>
+                </div>
+                <div class="grid-options" id="sizeOptions">
+                    <button class="option-button" data-size="XS">XS</button>
+                    <button class="option-button" data-size="S">S</button>
+                    <button class="option-button selected" data-size="M">M</button>
+                    <button class="option-button" data-size="L">L</button>
+                    <button class="option-button" data-size="XL">XL</button>
+                    <button class="option-button" data-size="2XL">2XL</button>
+                    <button class="option-button" data-size="3XL">3XL</button>
+                </div>
+            </div>
+
+            <!-- Star Count Option -->
+            <div class="option-section">
+                <div class="option-header">
+                    <h3 class="option-title">Yıldız Sayısı</h3>
+                </div>
+                <div class="star-count-control">
+                    <button id="decreaseStarCount" class="star-count-button">-</button>
+                    <span id="starCountDisplay" class="star-count-display">3</span>
+                    <button id="increaseStarCount" class="star-count-button">+</button>
+                </div>
+            </div>
+
+            <!-- Additional Stars Section (conditionally displayed) -->
+            <div class="option-section hidden" id="additionalStarsSection">
+                <div class="option-header">
+                    <h3 class="option-title">Ek Yıldız Ekle</h3>
+                </div>
+                <div class="grid-options" id="additionalStarOptions">
+                    <button class="option-button" data-star-type="halley">Halley</button>
+                    <button class="option-button" data-star-type="logodaki yıldız (1)">Logodaki Yıldız (1)</button>
+                    <button class="option-button" data-star-type="logodaki yıldız (2)">Logodaki Yıldız (2)</button>
+                    <button class="option-button" data-star-type="siyah çoraplılar">Siyah Çoraplılar</button>
+                    <button class="option-button" data-star-type="van persie">Van Persie</button>
+                    <button class="option-button" data-star-type="r. carlos">R. Carlos</button>
+                    <button class="option-button" data-star-type="hakan çalhanoğlu">Hakan Çalhanoğlu</button>
+                </div>
+            </div>
+
+            <!-- Hakan Çalhanoğlu Special Stars Section (conditionally displayed) -->
+            <div class="option-section hidden" id="hakanCalhanogluStarsSection">
+                <div class="option-header">
+                    <h3 class="option-title">Hakan Çalhanoğlu'na özel ek yıldızlar</h3>
+                </div>
+                <div class="grid-options" id="hakanCalhanogluStarOptions">
+                    <button class="option-button" data-star-type="inter'in yıldızı (1)">Inter'in Yıldızı (1)</button>
+                    <button class="option-button" data-star-type="inter'in yıldızı (2)">Inter'in Yıldızı (2)</button>
+                    <button class="option-button" data-star-type="milan'ın yıldızı (1)">Milan'ın Yıldızı (1)</button>
+                    <button class="option-button" data-star-type="küçüklük fotoğrafındaki galatasaray logosundaki yıldız (1)">Küçüklük Fotoğrafındaki Galatasaray Logosundaki Yıldız (1)</button>
+                    <button class="option-button" data-star-type="küçüklük fotoğrafındaki galatasaray logosundaki yıldız (2)">Küçüklük Fotoğrafındaki Galatasaray Logosundaki Yıldız (2)</button>
+                    <button class="option-button" data-star-type="küçüklük fotoğrafındaki galatasaray logosundaki yıldız (3)">Küçüklük Fotoğrafındaki Galatasaray Logosundaki Yıldız (3)</button>
+                </div>
+            </div>
+
+            <!-- Color Option -->
+            <div class="option-section">
+                <div class="option-header">
+                    <h3 class="option-title">Renk</h3>
+                </div>
+                <div class="grid-options">
+                    <button class="color-option-display selected" data-color="cubuklu">
+                        <img src="https://media.fenerium.com/Fenerium/media/images/urunler/AT013EFS014SR.jpg" alt="Çubuklu Renk">
+                    </button>
+                    <!-- Add more color options here if needed -->
+                </div>
+            </div>
+
+            <!-- Number and Name Section -->
+            <div class="option-section">
+                <div class="option-header">
+                    <h3 class="option-title">Numara ve İsim</h3>
+                </div>
+                <div class="player-toggle">
+                    <input type="checkbox" id="isPlayer" checked>
+                    <label for="isPlayer">Oyuncu</label>
+                </div>
+                <div class="number-name-inputs">
+                    <input type="text" id="jerseyNumber" placeholder="Numara" maxlength="2" value="10">
+                    <input type="text" id="jerseyName" placeholder="İsim" value="OYUNCU ADI">
+                </div>
+            </div>
+
+            <!-- Quantity Control -->
+            <div class="quantity-control">
+                <button id="decreaseQuantity" class="quantity-button">-</button>
+                <span id="quantityDisplay" class="quantity-display">1</span>
+                <button id="increaseQuantity" class="quantity-button">+</button>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="add-to-cart-button" id="addToCartButton">Sepete Ekle</button>
+                <button class="search-in-store-button">Mağazada Ara</button>
+            </div>
+
+            <!-- Product Features -->
+            <div class="product-features">
+                <div class="features-header" id="featuresHeader">
+                    <h3 class="option-title">Ürün Özellikleri</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="feature-list" id="featureList">
+                    <li class="feature-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-washing-machine"><path d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M12 18V4"/><path d="M16 18V4"/><path d="M8 18V4"/><circle cx="12" cy="11" r="3"/></svg>
+                        <span>30°C'de hassas yıkanabilir.</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        <span>Ağartıcı kullanılamaz.</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shirt"><path d="M20.38 3.46 16 2a4 4 0 0 1-4 4V20h4.09a2 2 0 0 0 1.66-2.9l-.82-1.24a1 1 0 0 1 .82-1.56h3.83a1 1 0 0 1 .82 1.56l-.82 1.24a2 4 0 0 0 1.66 2.9H22V6a4 4 0 0 0-1.62-3.46Z"/></svg>
+                        <span>Ilık ütü yapınız.</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        <span>Kuru temizleme yapılmaz.</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        <span>Santrifüjlü makinede kurutulmaz.</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-recycle"><path d="M7 19H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6.3"/><path d="M10.74 16.76 16 22h6v-6l-5.26-5.26a1 1 0 0 0-1.41 0l-2.35 2.34a1 1 0 0 0 0 1.41z"/></svg>
+                        <span>%100 Geri Dönüşümlü Polyester</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- Product Content from original HTML -->
+            <div class="primary-collapse-list">
+                <div class="primary-collapse active">
+                    <h3 class="collapse-header" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true">
+                        <span>Ürün İçeriği</span>
+                        <i class="fas fa-plus"></i>
+                    </h3>
+                    <div class="collapse show" id="collapse2">
+                        Geri döndü. Efsane Çubuklu forma bize emanet!<br />
+                        Fenerbahçe 25/26 iç saha forması şimdi satışta!<br />
+                        <br />
+                        &nbsp;
+                        <center><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" height="185" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/LpdSjbuip_E?si=GgskiuaoGF4hecs5" title="YouTube video player" width="330"></iframe>
+                        <center>&nbsp;</center>
+                        </center>
+                    </div>
+                </div>
+                <div class="primary-collapse">
+                    <h3 class="collapse-header" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false">
+                        <span>Kargo Süreci</span>
+                        <i class="fas fa-plus"></i>
+                    </h3>
+                    <div class="collapse" id="collapse3">
+                        Sipariş etmiş olduğunuz ürünleri aynı gün kargoya teslim etmeye gayret ediyoruz. Temini zaman alan ürünler için kargo teslim süresi ürün detayında belirtildiği gibi 3-5 iş günüdür. Gecikmesi muhtemel teslimat durumunda size bilgi verilecektir. Ürün teslimatının aksamadan gerçekleştirilebilmesi için lütfen gün içinde bulunduğunuz yerin adresini teslimat adresi olarak bildiriniz. Talepleriniz sipariş sonunda belirlemiş olduğunuz teslimat tipine göre hazırlanmak üzere işleme alınacaktır. İstanbul merkezli şirketimizden ürünler yurtiçi için Sendeo Kargo, UPS kargo, yurtdışı için ise DHL kargo firmasıyla gönderilecektir. Siparişleriniz onaylandıktan sonra en geç 5 (beş) iş günü sonunda Kargo firmasına teslim edilir. Yurtdışı siparişlerin gönderilerinde, gönderilen ülkenin yasalarına istinaden belirlenen vergi oranında gümrük bedeli çıkma ihtimali vardır. Ayrıca bu şekilde gümrükte işlem gören gönderiler için eğer gümrük işlemlerini DHL'in takip etmesini isterseniz, hizmet bedeli almaktadır. Bu bedeller alıcıya aittir. Müşteri temsilcimize danışarak değişik teslimat şartları konusunda görüşebilirsiniz.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Box for notifications -->
+    <div id="messageBox" class="message-box"></div>
+
+    <script>
+        // Initial price of the jersey
+        const basePrice = 4249.00;
+        let quantity = 1;
+        let selectedSize = 'M'; // Default selected size
+        let jerseyNumber = '10';
+        let jerseyName = 'OYUNCU ADI';
+        let isPlayerSelected = true;
+        let starCount = 3; // Default star count (0, 3, 5)
+        const allowedStarCounts = [0, 3, 5]; // Updated allowed star counts
+        let additionalStars = []; // Array to store selected additional stars
+        let hakanCalhanogluSpecialStars = []; // Array to store selected Hakan Çalhanoğlu special stars
+
+        // Price increments for star count
+        const starCountPrices = {
+            '0': 0,
+            '3': 100,
+            '5': 200
+        };
+
+        // Price increments for additional stars
+        const additionalStarPrices = {
+            'halley': 50,
+            'logodaki yıldız (1)': 75,
+            'logodaki yıldız (2)': 75,
+            'siyah çoraplılar': 60,
+            'van persie': 80,
+            'r. carlos': 80,
+            'hakan çalhanoğlu': 70
+        };
+
+        // Price increments for Hakan Çalhanoğlu special stars
+        const hakanCalhanogluSpecialStarPrices = {
+            "inter'in yıldızı (1)": 90,
+            "inter'in yıldızı (2)": 95,
+            "milan'ın yıldızı (1)": 85,
+            "küçüklük fotoğrafındaki galatasaray logosundaki yıldız (1)": 110,
+            "küçüklük fotoğrafındaki galatasaray logosundaki yıldız (2)": 115,
+            "küçüklük fotoğrafındaki galatasaray logosundaki yıldız (3)": 120
+        };
+
+        // Get DOM elements
+        const currentPriceElement = document.getElementById('currentPrice');
+        const decreaseQuantityButton = document.getElementById('decreaseQuantity');
+        const increaseQuantityButton = document.getElementById('increaseQuantity');
+        const quantityDisplay = document.getElementById('quantityDisplay');
+        const addToCartButton = document.getElementById('addToCartButton');
+        const sizeButtons = document.querySelectorAll('#sizeOptions .option-button');
+        const mainProductImage = document.getElementById('mainProductImage');
+        const thumbnailImages = document.querySelectorAll('.thumbnail-images-vertical img');
+        const messageBox = document.getElementById('messageBox');
+        const featuresHeader = document.getElementById('featuresHeader');
+        const featureList = document.getElementById('featureList');
+        const jerseyNumberInput = document.getElementById('jerseyNumber');
+        const jerseyNameInput = document.getElementById('jerseyName');
+        const isPlayerCheckbox = document.getElementById('isPlayer');
+        const starIconsContainer = document.getElementById('starIcons');
+
+        const decreaseStarCountButton = document.getElementById('decreaseStarCount');
+        const increaseStarCountButton = document.getElementById('increaseStarCount');
+        const starCountDisplay = document.getElementById('starCountDisplay');
+        const additionalStarsSection = document.getElementById('additionalStarsSection');
+        const additionalStarOptionsContainer = document.getElementById('additionalStarOptions');
+        const additionalStarButtons = additionalStarOptionsContainer.querySelectorAll('.option-button');
+
+        const hakanCalhanogluStarsSection = document.getElementById('hakanCalhanogluStarsSection');
+        const hakanCalhanogluStarOptionsContainer = document.getElementById('hakanCalhanogluStarOptions');
+        const hakanCalhanogluStarButtons = hakanCalhanogluStarOptionsContainer.querySelectorAll('.option-button');
+
+        // Helper function to extract number from star name (e.g., "Inter'in yıldızı (1)" -> 1)
+        function getStarCountFromString(starName) {
+            const match = starName.match(/\((\d+)\)/);
+            if (match && match[1]) {
+                return parseInt(match[1], 10);
+            }
+            // Default to 1 for named stars without a number (e.g., "Halley")
+            return 1;
+        }
+
+        // Helper function to check if a star name contains a number in parentheses
+        function isNumberedStar(starName) {
+            return /\(\d+\)/.test(starName);
+        }
+
+        // Helper function to get the prefix of a numbered star (e.g., "Inter'in yıldızı (1)" -> "Inter'in yıldızı")
+        function getStarPrefix(starName) {
+            const match = starName.match(/^(.*?)\s*\(\d+\)$/);
+            return match ? match[1].trim() : starName; // Return the part before the number, or the whole name if no number
+        }
+
+        // Function to update the displayed price
+        function updatePrice() {
+            let totalStarPrice = starCountPrices[starCount.toString()] || 0;
+            let totalAdditionalStarPrice = 0;
+            additionalStars.forEach(star => {
+                totalAdditionalStarPrice += additionalStarPrices[star] || 0;
+            });
+
+            let totalHakanCalhanogluSpecialStarPrice = 0;
+            hakanCalhanogluSpecialStars.forEach(star => {
+                totalHakanCalhanogluSpecialStarPrice += hakanCalhanogluSpecialStarPrices[star] || 0;
+            });
+
+            const totalPrice = (basePrice + totalStarPrice + totalAdditionalStarPrice + totalHakanCalhanogluSpecialStarPrice) * quantity;
+            currentPriceElement.textContent = totalPrice.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' });
+        }
+
+        // Function to render stars (next to price)
+        function renderStars() {
+            starIconsContainer.innerHTML = ''; // Clear existing stars
+
+            let totalVisualStars = starCount; // Base stars (0, 3, or 5)
+
+            // Add stars from additionalStars
+            additionalStars.forEach(star => {
+                totalVisualStars += getStarCountFromString(star);
+            });
+
+            // Add stars from Hakan Çalhanoğlu special stars
+            hakanCalhanogluSpecialStars.forEach(star => {
+                totalVisualStars += getStarCountFromString(star);
+            });
+
+            // Render the total visual stars
+            for (let i = 0; i < totalVisualStars; i++) {
+                const star = document.createElement('i');
+                star.classList.add('fas', 'fa-star'); // Solid star
+                starIconsContainer.appendChild(star);
+            }
+        }
+
+        // Function to update star count display and section visibility
+        function updateStarCountDisplay() {
+            starCountDisplay.textContent = starCount;
+            renderStars(); // Update stars next to price
+
+            // Toggle visibility of additional stars section
+            if (starCount === 5) {
+                additionalStarsSection.classList.remove('hidden');
+            } else {
+                additionalStarsSection.classList.add('hidden');
+                additionalStars = []; // Clear additional stars if not 5 stars
+                additionalStarButtons.forEach(button => button.classList.remove('selected'));
+                // Also hide Hakan Çalhanoğlu special stars if additional stars are hidden
+                hakanCalhanogluStarsSection.classList.add('hidden');
+                hakanCalhanogluSpecialStars = [];
+                hakanCalhanogluStarButtons.forEach(button => button.classList.remove('selected'));
+            }
+            updatePrice();
+        }
+
+        // Main function to handle selection/deselection of additional and special stars
+        function handleStarOptionSelection(button, sectionType) {
+            const starType = button.dataset.starType;
+            const isCurrentlySelected = button.classList.contains('selected');
+            const clickedIsNumbered = isNumberedStar(starType);
+            const clickedPrefix = getStarPrefix(starType); // Get prefix for the clicked star
+
+            let currentStarsArray;
+            let allButtonsInThisSection;
+
+            if (sectionType === 'additional') {
+                currentStarsArray = additionalStars;
+                allButtonsInThisSection = additionalStarButtons;
+            } else if (sectionType === 'hakan') {
+                currentStarsArray = hakanCalhanogluSpecialStars;
+                allButtonsInThisSection = hakanCalhanogluStarButtons;
+            } else {
+                console.error("Unknown section type:", sectionType);
+                return;
+            }
+
+            if (isCurrentlySelected) {
+                // Deselecting: simply remove from array and class
+                const index = currentStarsArray.indexOf(starType);
+                if (index > -1) {
+                    currentStarsArray.splice(index, 1);
+                }
+                button.classList.remove('selected');
+            } else {
+                // Selecting: apply exclusivity logic
+                if (clickedIsNumbered) {
+                    if (sectionType === 'additional') {
+                        // Logic for 'additional' section: only one numbered star from the whole section
+                        allButtonsInThisSection.forEach(btn => {
+                            if (btn !== button && isNumberedStar(btn.dataset.starType) && btn.classList.contains('selected')) {
+                                btn.classList.remove('selected');
+                                const index = currentStarsArray.indexOf(btn.dataset.starType);
+                                if (index > -1) {
+                                    currentStarsArray.splice(index, 1);
+                                }
+                            }
+                        });
+                    } else if (sectionType === 'hakan') {
+                        // NEW LOGIC for 'hakan' section: exclusivity by prefix
+                        allButtonsInThisSection.forEach(btn => {
+                            const btnStarType = btn.dataset.starType;
+                            if (btn !== button && isNumberedStar(btnStarType) && getStarPrefix(btnStarType) === clickedPrefix && btn.classList.contains('selected')) {
+                                btn.classList.remove('selected');
+                                const index = currentStarsArray.indexOf(btnStarType);
+                                if (index > -1) {
+                                    currentStarsArray.splice(index, 1);
+                                }
+                            }
+                        });
+                    }
+                }
+                // Add the new star
+                currentStarsArray.push(starType);
+                button.classList.add('selected');
+            }
+
+            // Update global arrays
+            if (sectionType === 'additional') {
+                additionalStars = currentStarsArray;
+            } else if (sectionType === 'hakan') {
+                hakanCalhanogluSpecialStars = currentStarsArray;
+            }
+
+            // Handle Hakan Çalhanoğlu section visibility:
+            // The section should only be visible if 'hakan çalhanoğlu' is selected among additional stars.
+            if (additionalStars.includes('hakan çalhanoğlu')) {
+                hakanCalhanogluStarsSection.classList.remove('hidden');
+            } else {
+                hakanCalhanogluStarsSection.classList.add('hidden');
+                // If Hakan Çalhanoğlu is deselected, clear its special stars
+                hakanCalhanogluSpecialStars = [];
+                hakanCalhanogluStarButtons.forEach(btn => btn.classList.remove('selected'));
+            }
+
+            updatePrice();
+            renderStars(); // Re-render all stars based on updated arrays
+            showMessage(`Ek yıldız seçimi güncellendi.`);
+        }
+
+        // Event listener for decreasing quantity
+        decreaseQuantityButton.addEventListener('click', () => {
+            if (quantity > 1) {
+                quantity--;
+                quantityDisplay.textContent = quantity;
+                updatePrice();
+            }
+        });
+
+        // Event listener for increasing quantity
+        increaseQuantityButton.addEventListener('click', () => {
+            quantity++;
+            quantityDisplay.textContent = quantity;
+            updatePrice();
+        });
+
+        // Event listeners for size selection
+        sizeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                sizeButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+                selectedSize = button.dataset.size;
+                showMessage(`Beden ${selectedSize} seçildi.`);
+            });
+        });
+
+        // Event listener for decreasing star count
+        decreaseStarCountButton.addEventListener('click', () => {
+            const currentIndex = allowedStarCounts.indexOf(starCount);
+            if (currentIndex > 0) {
+                starCount = allowedStarCounts[currentIndex - 1];
+                updateStarCountDisplay();
+            }
+        });
+
+        // Event listener for increasing star count
+        increaseStarCountButton.addEventListener('click', () => {
+            const currentIndex = allowedStarCounts.indexOf(starCount);
+            if (currentIndex < allowedStarCounts.length - 1) {
+                starCount = allowedStarCounts[currentIndex + 1];
+                updateStarCountDisplay();
+            }
+        });
+
+        // Attach event listeners for additional star selection
+        additionalStarButtons.forEach(button => {
+            button.addEventListener('click', () => handleStarOptionSelection(button, 'additional'));
+        });
+
+        // Attach event listeners for Hakan Çalhanoğlu special star selection
+        hakanCalhanogluStarButtons.forEach(button => {
+            button.addEventListener('click', () => handleStarOptionSelection(button, 'hakan'));
+        });
+
+        // Event listeners for thumbnail images
+        thumbnailImages.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                mainProductImage.src = thumbnail.dataset.fullImage;
+                thumbnailImages.forEach(img => img.classList.remove('active'));
+                thumbnail.classList.add('active');
+            });
+        });
+
+        // Event listener for Player checkbox
+        isPlayerCheckbox.addEventListener('change', () => {
+            isPlayerSelected = isPlayerCheckbox.checked;
+            jerseyNumberInput.disabled = !isPlayerSelected;
+            jerseyNameInput.disabled = !isPlayerSelected;
+            if (!isPlayerSelected) {
+                // Clear inputs if player option is deselected
+                jerseyNumberInput.value = '';
+                jerseyNameInput.value = '';
+            } else {
+                // Restore default values if re-selected
+                jerseyNumberInput.value = '10';
+                jerseyNameInput.value = 'OYUNCU ADI';
+            }
+        });
+
+        // Event listeners for number and name input changes
+        jerseyNumberInput.addEventListener('input', (event) => {
+            jerseyNumber = event.target.value;
+        });
+        jerseyNameInput.addEventListener('input', (event) => {
+            jerseyName = event.target.value;
+        });
+
+        // Event listener for Add to Cart button
+        addToCartButton.addEventListener('click', () => {
+            let customizationText = '';
+            if (isPlayerSelected) {
+                customizationText = ` (Numara: ${jerseyNumber || 'Yok'}, İsim: ${jerseyName || 'Yok'})`;
+            }
+            let starsText = ` (${starCount} Yıldız`;
+            if (additionalStars.length > 0) {
+                starsText += `, Ek: ${additionalStars.map(s => {
+                    // Capitalize first letter of each word for display
+                    return s.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                }).join(', ')}`;
+            }
+            if (hakanCalhanogluSpecialStars.length > 0) {
+                starsText += `, Hakan Çalhanoğlu Özel: ${hakanCalhanogluSpecialStars.map(s => {
+                    // Capitalize first letter of each word for display
+                    return s.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                }).join(', ')}`;
+            }
+            starsText += ')';
+
+            const message = `${quantity} adet ${selectedSize} beden forma${customizationText}${starsText} sepete eklendi! Toplam Fiyat: ${currentPriceElement.textContent}`;
+            showMessage(message, 'success');
+        });
+
+        // Toggle product features section (for "Ürün Özellikleri")
+        featuresHeader.addEventListener('click', () => {
+            featureList.classList.toggle('collapsed');
+            featuresHeader.classList.toggle('collapsed');
+            // Change icon from chevron-down to chevron-up or plus to minus
+            const icon = featuresHeader.querySelector('i');
+            if (featureList.classList.contains('collapsed')) {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        });
+
+        // Toggle for "Ürün İçeriği" and "Kargo Süreci" from original HTML
+        document.querySelectorAll('.primary-collapse .collapse-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const targetId = header.dataset.bsTarget;
+                const targetCollapse = document.querySelector(targetId);
+                const icon = header.querySelector('i');
+
+                // Toggle the 'show' class for Bootstrap collapse
+                if (targetCollapse.classList.contains('show')) {
+                    targetCollapse.classList.remove('show');
+                    header.setAttribute('aria-expanded', 'false');
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                } else {
+                    targetCollapse.classList.add('show');
+                    header.setAttribute('aria-expanded', 'true');
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                }
+            });
+        });
+
+
+        // Function to display messages (like alerts, but custom UI)
+        function showMessage(msg, type = 'info') {
+            messageBox.textContent = msg;
+            messageBox.className = 'message-box show';
+            if (type === 'success') {
+                messageBox.style.backgroundColor = '#4CAF50';
+            } else if (type === 'error') {
+                messageBox.style.backgroundColor = '#f44336';
+            } else {
+                messageBox.style.backgroundColor = '#2196F3';
+            }
+
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initial setup on page load
+        updatePrice(); // Ensure price is correct on load
+        updateStarCountDisplay(); // Initialize star count display and additional stars section visibility
+        // Set initial state for number/name inputs
+        jerseyNumberInput.disabled = !isPlayerSelected;
+        jerseyNameInput.disabled = !isPlayerSelected;
+    </script>
+</body>
+</html>
