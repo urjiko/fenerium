@@ -304,6 +304,7 @@
             gap: 10px;
             margin-top: 10px;
             margin-bottom: 5px;
+            flex-wrap: wrap; /* Allow wrapping for stars */
         }
         .price {
             font-size: 2.25rem; /* text-4xl */
@@ -312,9 +313,11 @@
         }
         .star-icons {
             display: flex;
+            flex-wrap: wrap; /* Allow stars to wrap */
             gap: 2px;
             color: #fcc400; /* Yellow for stars */
             font-size: 1.5rem; /* Larger stars */
+            max-width: calc(100% - 150px); /* Adjust max-width if price is fixed width */
         }
         .bonus-info {
             font-size: 0.875rem; /* text-sm */
@@ -619,6 +622,76 @@
         .hidden {
             display: none;
         }
+
+        /* Custom Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.show .modal-content {
+            transform: translateY(0);
+        }
+        .modal-content p {
+            font-size: 1.15rem;
+            color: #1f2937;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .modal-button {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            min-width: 120px; /* Ensure consistent button width */
+        }
+        .modal-button.yes {
+            background-color: #004d98;
+            color: #ffffff;
+            border: 1px solid #004d98;
+        }
+        .modal-button.yes:hover {
+            background-color: #003a7a;
+        }
+        .modal-button.no {
+            background-color: #ffffff;
+            color: #004d98;
+            border: 1px solid #004d98;
+        }
+        .modal-button.no:hover {
+            background-color: #e0f2fe;
+        }
     </style>
 </head>
 <body>
@@ -872,6 +945,17 @@
     <!-- Message Box for notifications -->
     <div id="messageBox" class="message-box"></div>
 
+    <!-- Hakan Çalhanoğlu Confirmation Modal -->
+    <div id="hakanCalhanogluModal" class="modal-overlay">
+        <div class="modal-content">
+            <p>Hakan Çalhanoğlu Galatasaraylı, yine de satın almak istiyor musunuz?</p>
+            <div class="modal-buttons">
+                <button id="modalYesButton" class="modal-button yes">Evet</button>
+                <button id="modalNoButton" class="modal-button no">Hayır</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Initial price of the jersey
         const basePrice = 4249.00;
@@ -940,6 +1024,11 @@
         const hakanCalhanogluStarsSection = document.getElementById('hakanCalhanogluStarsSection');
         const hakanCalhanogluStarOptionsContainer = document.getElementById('hakanCalhanogluStarOptions');
         const hakanCalhanogluStarButtons = hakanCalhanogluStarOptionsContainer.querySelectorAll('.option-button');
+
+        // Modal elements
+        const hakanCalhanogluModal = document.getElementById('hakanCalhanogluModal');
+        const modalYesButton = document.getElementById('modalYesButton');
+        const modalNoButton = document.getElementById('modalNoButton');
 
         // Helper function to extract number from star name (e.g., "Inter'in yıldızı (1)" -> 1)
         function getStarCountFromString(starName) {
@@ -1054,30 +1143,18 @@
             } else {
                 // Selecting: apply exclusivity logic
                 if (clickedIsNumbered) {
-                    if (sectionType === 'additional') {
-                        // Logic for 'additional' section: only one numbered star from the whole section
-                        allButtonsInThisSection.forEach(btn => {
-                            if (btn !== button && isNumberedStar(btn.dataset.starType) && btn.classList.contains('selected')) {
-                                btn.classList.remove('selected');
-                                const index = currentStarsArray.indexOf(btn.dataset.starType);
-                                if (index > -1) {
-                                    currentStarsArray.splice(index, 1);
-                                }
+                    // This logic applies to both 'additional' and 'hakan' sections for numbered stars.
+                    // If a numbered star is clicked, deselect all other numbered stars with the same prefix in this section.
+                    allButtonsInThisSection.forEach(btn => {
+                        const btnStarType = btn.dataset.starType;
+                        if (btn !== button && isNumberedStar(btnStarType) && getStarPrefix(btnStarType) === clickedPrefix && btn.classList.contains('selected')) {
+                            btn.classList.remove('selected');
+                            const index = currentStarsArray.indexOf(btnStarType);
+                            if (index > -1) {
+                                currentStarsArray.splice(index, 1);
                             }
-                        });
-                    } else if (sectionType === 'hakan') {
-                        // NEW LOGIC for 'hakan' section: exclusivity by prefix
-                        allButtonsInThisSection.forEach(btn => {
-                            const btnStarType = btn.dataset.starType;
-                            if (btn !== button && isNumberedStar(btnStarType) && getStarPrefix(btnStarType) === clickedPrefix && btn.classList.contains('selected')) {
-                                btn.classList.remove('selected');
-                                const index = currentStarsArray.indexOf(btnStarType);
-                                if (index > -1) {
-                                    currentStarsArray.splice(index, 1);
-                                }
-                            }
-                        });
-                    }
+                        }
+                    });
                 }
                 // Add the new star
                 currentStarsArray.push(starType);
@@ -1105,6 +1182,41 @@
             updatePrice();
             renderStars(); // Re-render all stars based on updated arrays
             showMessage(`Ek yıldız seçimi güncellendi.`);
+        }
+
+        // Function to show the Hakan Çalhanoğlu modal
+        function showHakanCalhanogluModal() {
+            hakanCalhanogluModal.classList.add('show');
+        }
+
+        // Function to hide the Hakan Çalhanoğlu modal
+        function hideHakanCalhanogluModal() {
+            hakanCalhanogluModal.classList.remove('show');
+        }
+
+        // Function to perform the actual add to cart action
+        function performAddToCart() {
+            let customizationText = '';
+            if (isPlayerSelected) {
+                customizationText = ` (Numara: ${jerseyNumber || 'Yok'}, İsim: ${jerseyName || 'Yok'})`;
+            }
+            let starsText = ` (${starCount} Yıldız`;
+            if (additionalStars.length > 0) {
+                starsText += `, Ek: ${additionalStars.map(s => {
+                    // Capitalize first letter of each word for display
+                    return s.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                }).join(', ')}`;
+            }
+            if (hakanCalhanogluSpecialStars.length > 0) {
+                starsText += `, Hakan Çalhanoğlu Özel: ${hakanCalhanogluSpecialStars.map(s => {
+                    // Capitalize first letter of each word for each word for display
+                    return s.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                }).join(', ')}`;
+            }
+            starsText += ')';
+
+            const message = `${quantity} adet ${selectedSize} beden forma${customizationText}${starsText} sepete eklendi! Toplam Fiyat: ${currentPriceElement.textContent}`;
+            showMessage(message, 'success');
         }
 
         // Event listener for decreasing quantity
@@ -1196,27 +1308,30 @@
 
         // Event listener for Add to Cart button
         addToCartButton.addEventListener('click', () => {
-            let customizationText = '';
-            if (isPlayerSelected) {
-                customizationText = ` (Numara: ${jerseyNumber || 'Yok'}, İsim: ${jerseyName || 'Yok'})`;
+            if (additionalStars.includes('hakan çalhanoğlu')) {
+                showHakanCalhanogluModal();
+            } else {
+                performAddToCart();
             }
-            let starsText = ` (${starCount} Yıldız`;
-            if (additionalStars.length > 0) {
-                starsText += `, Ek: ${additionalStars.map(s => {
-                    // Capitalize first letter of each word for display
-                    return s.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-                }).join(', ')}`;
-            }
-            if (hakanCalhanogluSpecialStars.length > 0) {
-                starsText += `, Hakan Çalhanoğlu Özel: ${hakanCalhanogluSpecialStars.map(s => {
-                    // Capitalize first letter of each word for display
-                    return s.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-                }).join(', ')}`;
-            }
-            starsText += ')';
+        });
 
-            const message = `${quantity} adet ${selectedSize} beden forma${customizationText}${starsText} sepete eklendi! Toplam Fiyat: ${currentPriceElement.textContent}`;
-            showMessage(message, 'success');
+        // Modal Yes button click
+        modalYesButton.addEventListener('click', () => {
+            hideHakanCalhanogluModal();
+            performAddToCart();
+        });
+
+        // Modal No button click and hover effect
+        modalNoButton.addEventListener('click', () => {
+            hideHakanCalhanogluModal();
+        });
+
+        modalNoButton.addEventListener('mouseover', () => {
+            modalNoButton.textContent = 'Ali Koç Başkan Fenerbahçe Şampiyon';
+        });
+
+        modalNoButton.addEventListener('mouseout', () => {
+            modalNoButton.textContent = 'Hayır';
         });
 
         // Toggle product features section (for "Ürün Özellikleri")
