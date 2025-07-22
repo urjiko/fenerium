@@ -564,9 +564,9 @@
             margin-bottom: 15px;
         }
         .features-header h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #1f2937;
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+            color: #1f2937; /* gray-700 */
         }
         .features-header i {
             font-size: 1rem;
@@ -692,6 +692,22 @@
         .modal-button.no:hover {
             background-color: #e0f2fe;
         }
+
+        /* Footer Disclaimer */
+        .footer-disclaimer {
+            width: 100%;
+            background-color: #333;
+            color: #bbb;
+            font-size: 0.75rem;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px; /* Space from the product container */
+            border-top: 1px solid #444;
+        }
+        .footer-disclaimer p {
+            margin: 0;
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body>
@@ -709,9 +725,9 @@
     <!-- Main Header -->
     <header class="main-header">
         <div class="logo-search">
-            <img src="fenerium-logo.png" alt="Fenerium Logo" class="logo h-10">
+            <img src="fenerium-logo.png" alt="Feneruim Logo" class="logo h-10">
             <div class="search-bar">
-                <input type="text" placeholder="Fenerium'da Ara">
+                <input type="text" placeholder="Feneruim'da Ara">
                 <i class="fas fa-search search-icon"></i>
             </div>
         </div>
@@ -776,7 +792,7 @@
                     <!-- Stars will be dynamically added here -->
                 </div>
             </div>
-            <p class="bonus-info">Fener Bonusu ile %10 indirim! <a href="https://www.bonus.com.tr/fenerbahce-bonus-hemen-basvur?SourceCode=5C062196" target="_blank">Başvurmak için tıklayın.</a></p>
+            <p class="bonus-info">Fener Bonusu ile %10 indirim!</p>
 
             <!-- Size Options -->
             <div class="option-section">
@@ -954,6 +970,13 @@
                 <button id="modalNoButton" class="modal-button no">Hayır</button>
             </div>
         </div>
+    </div>
+
+    <!-- Footer Disclaimer -->
+    <div class="footer-disclaimer">
+        <p>Bu web sayfası, yalnızca eğitim ve demo amaçlı oluşturulmuştur. Gerçek bir e-ticaret sitesi değildir ve herhangi bir ticari amacı bulunmamaktadır.</p>
+        <p>Gösterilen ürünler, görseller ve markalar gerçek kurumlarla ilişkili değildir ve telif hakkı ihlali durumunda ilgili içerik derhal kaldırılacaktır.</p>
+        <p>Tüm hakları ilgili marka sahiplerine aittir.</p>
     </div>
 
     <script>
@@ -1208,7 +1231,7 @@
 
             updatePrice();
             renderStars(); // Re-render all stars based on updated arrays
-            showMessage(`Ek yıldız seçimi güncellendi.`);
+            // Removed: showMessage(`Ek yıldız seçimi güncellendi.`);
         }
 
         // Function to show the Hakan Çalhanoğlu modal
@@ -1268,7 +1291,7 @@
                 sizeButtons.forEach(btn => btn.classList.remove('selected'));
                 button.classList.add('selected');
                 selectedSize = button.dataset.size;
-                showMessage(`Beden ${selectedSize} seçildi.`);
+                // Removed: showMessage(`Beden ${selectedSize} seçildi.`);
             });
         });
 
