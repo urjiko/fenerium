@@ -878,7 +878,7 @@
                 <button class="add-to-cart-button" id="addToCartButton">Sepete Ekle</button>
                 <button class="search-in-store-button">Mağazada Ara</button>
             </div>
-
+            
             <!-- Product Features -->
             <div class="product-features">
                 <div class="features-header" id="featuresHeader">
@@ -1112,6 +1112,27 @@
             updatePrice();
         }
 
+        // Function to play hakan.mp3
+        function playHakanMp3() {
+            console.log("Attempting to play hakan.mp3...");
+            try {
+                const hakanAudio = new Audio('hakan.mp3'); // Use the uploaded file name directly
+                hakanAudio.volume = 0.8; // Set a reasonable volume
+                hakanAudio.play()
+                    .then(() => {
+                        console.log("hakan.mp3 played successfully.");
+                        showMessage("Hakan.mp3 başarıyla çalındı!", 'success');
+                    })
+                    .catch(e => {
+                        console.error("Error playing hakan.mp3:", e);
+                        showMessage("Hakan.mp3 çalınamadı. Hata: " + e.message + ". Dosya yolunu veya tarayıcı kısıtlamalarını kontrol edin.", 'error');
+                    });
+            } catch (e) {
+                console.error("Error creating Audio object for hakan.mp3:", e);
+                showMessage("Ses dosyası oluşturulurken hata oluştu: " + e.message, 'error');
+            }
+        }
+
         // Main function to handle selection/deselection of additional and special stars
         function handleStarOptionSelection(button, sectionType) {
             const starType = button.dataset.starType;
@@ -1147,6 +1168,7 @@
                     // If a numbered star is clicked, deselect all other numbered stars with the same prefix in this section.
                     allButtonsInThisSection.forEach(btn => {
                         const btnStarType = btn.dataset.starType;
+                        // Only deselect if it's a numbered star AND has the same prefix
                         if (btn !== button && isNumberedStar(btnStarType) && getStarPrefix(btnStarType) === clickedPrefix && btn.classList.contains('selected')) {
                             btn.classList.remove('selected');
                             const index = currentStarsArray.indexOf(btnStarType);
@@ -1159,6 +1181,11 @@
                 // Add the new star
                 currentStarsArray.push(starType);
                 button.classList.add('selected');
+
+                // Play hakan.mp3 if "Hakan Çalhanoğlu" is selected
+                if (starType === 'hakan çalhanoğlu') {
+                    playHakanMp3();
+                }
             }
 
             // Update global arrays
