@@ -769,8 +769,8 @@
                 <img src="3yildiztam.jpg" alt="Thumbnail 3" data-full-image="3yildiztam.jpg">
                 <img src="3yildiztamarka.jpg" alt="Thumbnail 4" data-full-image="3yildiztamarka.jpg">
                 <img src="3yildiztamarkainsan.jpg" alt="Thumbnail 5" data-full-image="3yildiztamarkainsan.jpg">
-                <img src="3yildizyakin.jpg" alt="Thumbnail 6" data-full-image="3yildizyakin.jpg">
-                <img src="halley.jpg" alt="Thumbnail 7" data-full-image="halley.jpg">
+                <img src="halley.jpg" alt="Thumbnail 6" data-full-image="halley.jpg">
+                <!-- Add more thumbnails if needed -->
             </div>
             <img id="mainProductImage" src="3yildizboydan.jpg" alt="Fener Forması" class="main-image">
         </div>
@@ -836,6 +836,7 @@
                     <button class="option-button" data-star-type="van persie">Van Persie</button>
                     <button class="option-button" data-star-type="r. carlos">R. Carlos</button>
                     <button class="option-button" data-star-type="hakan çalhanoğlu">Hakan Çalhanoğlu</button>
+                    <button class="option-button" data-star-type="kerem aktürkoğlu">Kerem Aktürkoğlu</button>
                 </div>
             </div>
 
@@ -851,6 +852,19 @@
                     <button class="option-button" data-star-type="küçüklük fotoğrafındaki galatasaray logosundaki yıldız (1)">Küçüklük Fotoğrafındaki Galatasaray Logosundaki Yıldız (1)</button>
                     <button class="option-button" data-star-type="küçüklük fotoğrafındaki galatasaray logosundaki yıldız (2)">Küçüklük Fotoğrafındaki Galatasaray Logosundaki Yıldız (2)</button>
                     <button class="option-button" data-star-type="küçüklük fotoğrafındaki galatasaray logosundaki yıldız (3)">Küçüklük Fotoğrafındaki Galatasaray Logosundaki Yıldız (3)</button>
+                </div>
+            </div>
+
+            <!-- Kerem Aktürkoğlu Special Stars Section (conditionally displayed) -->
+            <div class="option-section hidden" id="keremAkturkogluStarsSection">
+                <div class="option-header">
+                    <h3 class="option-title">Kerem Aktürkoğlu'na özel ek yıldızlar</h3>
+                </div>
+                <div class="grid-options" id="keremAkturkogluStarOptions">
+                    <button class="option-button" data-star-type="galatasaray'ın yıldızı (1)">Galatasaray'ın Yıldızı (1)</button>
+                    <button class="option-button" data-star-type="galatasaray'ın yıldızı (2)">Galatasaray'ın Yıldızı (2)</button>
+                    <button class="option-button" data-star-type="galatasaray'ın yıldızı (3)">Galatasaray'ın Yıldızı (3)</button>
+                    <button class="option-button" data-star-type="galatasaray'ın yıldızı (4)">Galatasaray'ın Yıldızı (4)</button>
                 </div>
             </div>
 
@@ -991,6 +1005,7 @@
         const allowedStarCounts = [0, 3, 5]; // Updated allowed star counts
         let additionalStars = []; // Array to store selected additional stars
         let hakanCalhanogluSpecialStars = []; // Array to store selected Hakan Çalhanoğlu special stars
+        let keremAkturkogluSpecialStars = []; // Array to store selected Kerem Aktürkoğlu special stars
 
         // Price increments for star count
         const starCountPrices = {
@@ -1007,7 +1022,8 @@
             'siyah çoraplılar': 60,
             'van persie': 80,
             'r. carlos': 80,
-            'hakan çalhanoğlu': 70
+            'hakan çalhanoğlu': 70,
+            'kerem aktürkoğlu': 70 // Added price for Kerem Aktürkoğlu
         };
 
         // Price increments for Hakan Çalhanoğlu special stars
@@ -1018,6 +1034,14 @@
             "küçüklük fotoğrafındaki galatasaray logosundaki yıldız (1)": 110,
             "küçüklük fotoğrafındaki galatasaray logosundaki yıldız (2)": 115,
             "küçüklük fotoğrafındaki galatasaray logosundaki yıldız (3)": 120
+        };
+
+        // Price increments for Kerem Aktürkoğlu special stars
+        const keremAkturkogluSpecialStarPrices = {
+            "galatasaray'ın yıldızı (1)": 100,
+            "galatasaray'ın yıldızı (2)": 105,
+            "galatasaray'ın yıldızı (3)": 110,
+            "galatasaray'ın yıldızı (4)": 115
         };
 
         // Get DOM elements
@@ -1047,6 +1071,10 @@
         const hakanCalhanogluStarsSection = document.getElementById('hakanCalhanogluStarsSection');
         const hakanCalhanogluStarOptionsContainer = document.getElementById('hakanCalhanogluStarOptions');
         const hakanCalhanogluStarButtons = hakanCalhanogluStarOptionsContainer.querySelectorAll('.option-button');
+
+        const keremAkturkogluStarsSection = document.getElementById('keremAkturkogluStarsSection');
+        const keremAkturkogluStarOptionsContainer = document.getElementById('keremAkturkogluStarOptions');
+        const keremAkturkogluStarButtons = keremAkturkogluStarOptionsContainer.querySelectorAll('.option-button');
 
         // Modal elements
         const hakanCalhanogluModal = document.getElementById('hakanCalhanogluModal');
@@ -1087,7 +1115,12 @@
                 totalHakanCalhanogluSpecialStarPrice += hakanCalhanogluSpecialStarPrices[star] || 0;
             });
 
-            const totalPrice = (basePrice + totalStarPrice + totalAdditionalStarPrice + totalHakanCalhanogluSpecialStarPrice) * quantity;
+            let totalKeremAkturkogluSpecialStarPrice = 0;
+            keremAkturkogluSpecialStars.forEach(star => {
+                totalKeremAkturkogluSpecialStarPrice += keremAkturkogluSpecialStarPrices[star] || 0;
+            });
+
+            const totalPrice = (basePrice + totalStarPrice + totalAdditionalStarPrice + totalHakanCalhanogluSpecialStarPrice + totalKeremAkturkogluSpecialStarPrice) * quantity;
             currentPriceElement.textContent = totalPrice.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' });
         }
 
@@ -1104,6 +1137,11 @@
 
             // Add stars from Hakan Çalhanoğlu special stars
             hakanCalhanogluSpecialStars.forEach(star => {
+                totalVisualStars += getStarCountFromString(star);
+            });
+
+            // Add stars from Kerem Aktürkoğlu special stars
+            keremAkturkogluSpecialStars.forEach(star => {
                 totalVisualStars += getStarCountFromString(star);
             });
 
@@ -1131,6 +1169,10 @@
                 hakanCalhanogluStarsSection.classList.add('hidden');
                 hakanCalhanogluSpecialStars = [];
                 hakanCalhanogluStarButtons.forEach(button => button.classList.remove('selected'));
+                // Also hide Kerem Aktürkoğlu special stars if additional stars are hidden
+                keremAkturkogluStarsSection.classList.add('hidden');
+                keremAkturkogluSpecialStars = [];
+                keremAkturkogluStarButtons.forEach(button => button.classList.remove('selected'));
             }
             updatePrice();
         }
@@ -1144,7 +1186,6 @@
                 hakanAudio.play()
                     .then(() => {
                         console.log("hakan.mp3 played successfully.");
-                        // Removed: showMessage("Hakan.mp3 başarıyla çalındı!", 'success');
                     })
                     .catch(e => {
                         console.error("Error playing hakan.mp3:", e);
@@ -1172,6 +1213,9 @@
             } else if (sectionType === 'hakan') {
                 currentStarsArray = hakanCalhanogluSpecialStars;
                 allButtonsInThisSection = hakanCalhanogluStarButtons;
+            } else if (sectionType === 'kerem') {
+                currentStarsArray = keremAkturkogluSpecialStars;
+                allButtonsInThisSection = keremAkturkogluStarButtons;
             } else {
                 console.error("Unknown section type:", sectionType);
                 return;
@@ -1187,7 +1231,7 @@
             } else {
                 // Selecting: apply exclusivity logic
                 if (clickedIsNumbered) {
-                    // This logic applies to both 'additional' and 'hakan' sections for numbered stars.
+                    // This logic applies to all sections for numbered stars.
                     // If a numbered star is clicked, deselect all other numbered stars with the same prefix in this section.
                     allButtonsInThisSection.forEach(btn => {
                         const btnStarType = btn.dataset.starType;
@@ -1216,6 +1260,8 @@
                 additionalStars = currentStarsArray;
             } else if (sectionType === 'hakan') {
                 hakanCalhanogluSpecialStars = currentStarsArray;
+            } else if (sectionType === 'kerem') {
+                keremAkturkogluSpecialStars = currentStarsArray;
             }
 
             // Handle Hakan Çalhanoğlu section visibility:
@@ -1229,9 +1275,19 @@
                 hakanCalhanogluStarButtons.forEach(btn => btn.classList.remove('selected'));
             }
 
+            // Handle Kerem Aktürkoğlu section visibility:
+            // The section should only be visible if 'kerem aktürkoğlu' is selected among additional stars.
+            if (additionalStars.includes('kerem aktürkoğlu')) {
+                keremAkturkogluStarsSection.classList.remove('hidden');
+            } else {
+                keremAkturkogluStarsSection.classList.add('hidden');
+                // If Kerem Aktürkoğlu is deselected, clear its special stars
+                keremAkturkogluSpecialStars = [];
+                keremAkturkogluStarButtons.forEach(btn => btn.classList.remove('selected'));
+            }
+
             updatePrice();
             renderStars(); // Re-render all stars based on updated arrays
-            // Removed: showMessage(`Ek yıldız seçimi güncellendi.`);
         }
 
         // Function to show the Hakan Çalhanoğlu modal
@@ -1259,6 +1315,12 @@
             }
             if (hakanCalhanogluSpecialStars.length > 0) {
                 starsText += `, Hakan Çalhanoğlu Özel: ${hakanCalhanogluSpecialStars.map(s => {
+                    // Capitalize first letter of each word for each word for display
+                    return s.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                }).join(', ')}`;
+            }
+            if (keremAkturkogluSpecialStars.length > 0) {
+                starsText += `, Kerem Aktürkoğlu Özel: ${keremAkturkogluSpecialStars.map(s => {
                     // Capitalize first letter of each word for each word for display
                     return s.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
                 }).join(', ')}`;
@@ -1291,7 +1353,6 @@
                 sizeButtons.forEach(btn => btn.classList.remove('selected'));
                 button.classList.add('selected');
                 selectedSize = button.dataset.size;
-                // Removed: showMessage(`Beden ${selectedSize} seçildi.`);
             });
         });
 
@@ -1321,6 +1382,11 @@
         // Attach event listeners for Hakan Çalhanoğlu special star selection
         hakanCalhanogluStarButtons.forEach(button => {
             button.addEventListener('click', () => handleStarOptionSelection(button, 'hakan'));
+        });
+
+        // Attach event listeners for Kerem Aktürkoğlu special star selection
+        keremAkturkogluStarButtons.forEach(button => {
+            button.addEventListener('click', () => handleStarOptionSelection(button, 'kerem'));
         });
 
         // Event listeners for thumbnail images
